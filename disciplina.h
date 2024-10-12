@@ -18,6 +18,6 @@ void cadastra_disciplina(ArvoreDisciplinas **raiz, int codigo, char nome[], int 
 Disciplina* busca_disciplina(ArvoreDisciplinas *raiz, int codigo);
 void exibe_disciplinas(ArvoreDisciplinas *raiz);
 void exibe_disciplinas_por_periodo(ArvoreDisciplinas *raiz, int periodo);
-ArvoreDisciplinas* encontra_minimo(ArvoreDisciplinas *raiz);
+ArvoreDisciplinas* encontra_minimo_disciplina(ArvoreDisciplinas *raiz);
 
 #endif

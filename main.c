@@ -35,7 +35,7 @@ void cadastrar_curso(ArvoreCursos **arvore_cursos) {
     printf("Digite a quantidade de períodos do curso: ");
     scanf("%d", &qtd_periodos);
 
-    cadastra_curso(arvore_c ursos, codigo, nome, qtd_periodos);
+    cadastra_curso(arvore_cursos, codigo, nome, qtd_periodos);
 }
 
 // Função auxiliar para cadastro de disciplinas
@@ -133,7 +133,7 @@ void cadastrar_aluno_disciplina(ListaAlunos *lista_alunos) {
         return;
     }
 
-    cadastrar_aluno_disciplina(aluno, codigo_disciplina);
+    cadastrar_aluno_disciplina_aluno(aluno, codigo_disciplina);
 }
 
 int main() {
