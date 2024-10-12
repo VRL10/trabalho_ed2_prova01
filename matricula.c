@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matricula.h"
+#include "aluno.h"
 
 void inicializa_arvore_matricula(Matricula **raiz) {
     *raiz = NULL;
@@ -48,4 +49,12 @@ int remove_matricula(Matricula **raiz, int codigo_disciplina) {
         free(temp);
         return 0; // Sucesso
     }
+}
+
+int remove_matricula_disciplina(Matricula **raiz, int codigo_disciplina) {
+    return remove_matricula(raiz, codigo_disciplina);
+}
+
+void cadastrar_aluno_disciplina(Aluno *aluno, int codigo_disciplina) {
+    cadastra_matricula(&aluno->arvore_matricula, codigo_disciplina);
 }

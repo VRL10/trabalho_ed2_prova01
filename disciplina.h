@@ -18,5 +18,6 @@ void cadastra_disciplina(ArvoreDisciplinas **raiz, int codigo, char nome[], int 
 Disciplina* busca_disciplina(ArvoreDisciplinas *raiz, int codigo);
 void exibe_disciplinas(ArvoreDisciplinas *raiz);
 void exibe_disciplinas_por_periodo(ArvoreDisciplinas *raiz, int periodo);
+int remove_disciplina(ArvoreDisciplinas **raiz, int codigo_disciplina);
 
 #endif
