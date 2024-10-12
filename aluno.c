@@ -4,11 +4,26 @@
 #include "aluno.h"
 #include "curso.h"
 
+int verifica_matricula_existente(ListaAlunos *lista, int matricula) {
+    while (lista != NULL) {
+        if (lista->aluno->matricula == matricula) {
+            return 1; // Matrícula já existe
+        }
+        lista = lista->prox;
+    }
+    return 0; // Matrícula não existe
+}
+
 void inicializa_lista_alunos(ListaAlunos **lista) {
     *lista = NULL;
 }
 
 void cadastra_aluno(ListaAlunos **lista, ArvoreCursos *arvore_cursos, int matricula, char nome[], int codigo_curso) {
+    if (verifica_matricula_existente(*lista, matricula)) {
+        printf("Erro: Matrícula já existe!\n");
+        return;
+    }
+
     if (busca_curso(arvore_cursos, codigo_curso) == NULL) {
         printf("Erro: O curso não está cadastrado!\n");
         return;

@@ -3,6 +3,20 @@
 #include <string.h>
 #include "disciplina.h"
 
+int verifica_codigo_disciplina_existente(ArvoreDisciplinas *raiz, int codigo) {
+    while (raiz != NULL) {
+        if (raiz->disciplina->codigo == codigo) {
+            return 1; // Código de disciplina já existe
+        }
+        if (codigo < raiz->disciplina->codigo) {
+            raiz = raiz->esq;
+        } else {
+            raiz = raiz->dir;
+        }
+    }
+    return 0; // Código de disciplina não existe
+}
+
 void inicializa_arvore_disciplinas(ArvoreDisciplinas **raiz) {
     *raiz = NULL;
 }
@@ -17,24 +31,49 @@ void cadastra_disciplina(ArvoreDisciplinas **raiz, int codigo, char nome[], int 
         return;
     }
 
-    if (*raiz == NULL) {
-        *raiz = (ArvoreDisciplinas *)malloc(sizeof(ArvoreDisciplinas));
-        (*raiz)->disciplina = (Disciplina *)malloc(sizeof(Disciplina));
-        (*raiz)->disciplina->codigo = codigo;
-        strcpy((*raiz)->disciplina->nome, nome);
-        (*raiz)->disciplina->periodo = periodo;
-        (*raiz)->disciplina->carga_horaria = carga_horaria;
-        (*raiz)->esq = (*raiz)->dir = NULL;
-    } else if (codigo < (*raiz)->disciplina->codigo) {
-        cadastra_disciplina(&(*raiz)->esq, codigo, nome, periodo, carga_horaria, max_periodos);
-    } else {
-        cadastra_disciplina(&(*raiz)->dir, codigo, nome, periodo, carga_horaria, max_periodos);
+    if (verifica _codigo_disciplina_existente(*raiz, codigo)) {
+        printf("Erro: Código de disciplina já existe!\n");
+        return;
+    }
+
+    ArvoreDisciplinas *novo = (ArvoreDisciplinas *)malloc(sizeof(ArvoreDisciplinas));
+    if (novo != NULL) {
+        novo->disciplina = (Disciplina *)malloc(sizeof(Disciplina));
+        if (novo->disciplina != NULL) {
+            novo->disciplina->codigo = codigo;
+            strcpy(novo->disciplina->nome, nome);
+            novo->disciplina->periodo = periodo;
+            novo->disciplina->carga_horaria = carga_horaria;
+            novo->esq = novo->dir = NULL;
+
+            if (*raiz == NULL) {
+                *raiz = novo;
+            } else {
+                ArvoreDisciplinas *atual = *raiz, *anterior = NULL;
+                while (atual != NULL) {
+                    anterior = atual;
+                    if (codigo < atual->disciplina->codigo) {
+                        atual = atual->esq;
+                    } else {
+                        atual = atual->dir;
+                    }
+                }
+
+                if (codigo < anterior->disciplina->codigo) {
+                    anterior->esq = novo;
+                } else {
+                    anterior->dir = novo;
+                }
+            }
+        } else {
+            free(novo);
+        }
     }
 }
 
 Disciplina* busca_disciplina(ArvoreDisciplinas *raiz, int codigo) {
     while (raiz != NULL) {
-        if (codigo == raiz->disciplina->codigo) {
+        if (raiz->disciplina->codigo == codigo) {
             return raiz->disciplina;
         } else if (codigo < raiz->disciplina->codigo) {
             raiz = raiz->esq;
@@ -52,16 +91,6 @@ void exibe_disciplinas(ArvoreDisciplinas *raiz) {
                raiz->disciplina->codigo, raiz->disciplina->nome, raiz->disciplina->periodo, raiz->disciplina->carga_horaria);
         exibe_disciplinas(raiz->dir);
     }
-}
-
-// Função para exibir todas as disciplinas de um curso
-void exibir_disciplinas_curso(ArvoreDisciplinas *raiz) {
-    if (raiz == NULL) {
-        printf("Nenhuma disciplina cadastrada!\n");
-        return;
-    }
-
-    exibe_disciplinas(raiz);  // Reutiliza a função já existente para exibir todas as disciplinas
 }
 
 void exibe_disciplinas_por_periodo(ArvoreDisciplinas *raiz, int periodo) {

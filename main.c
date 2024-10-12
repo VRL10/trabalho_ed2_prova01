@@ -15,8 +15,8 @@ int menu() {
     printf("4. Exibir Cursos\n");
     printf("5. Exibir Alunos\n");
     printf("6. Exibir Disciplinas de um Curso\n");
-    printf("7. Exibir Disciplinas por Periodo de um Curso\n");  // Nova opção
-    printf("8. Exibir Disciplinas de um Aluno\n");              // Nova opção
+    printf("7. Exibir Disciplinas por Periodo de um Curso\n");
+    printf("8. Exibir Disciplinas de um Aluno\n");
     printf("0. Sair\n");
     printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
@@ -137,7 +137,7 @@ int main() {
                 cadastrar_disciplina(arvore_cursos);
                 break;
             case 3:
-                cadastrar_aluno(&lista_alunos, arvore_cursos);
+                cadastrar_aluno(& lista_alunos, arvore_cursos);
                 break;
             case 4:
                 exibe_cursos(arvore_cursos);
@@ -151,16 +151,16 @@ int main() {
                 scanf("%d", &codigo_curso);
                 Curso *curso = busca_curso(arvore_cursos, codigo_curso);
                 if (curso != NULL) {
-                    exibir_disciplinas_curso(curso->arvore_disciplinas);  // Chama a função correta
+                    exibe_disciplinas(curso->arvore_disciplinas);
                 } else {
                     printf("Curso não encontrado!\n");
                 }
                 break;
             case 7:
-                exibir_disciplinas_por_periodo(arvore_cursos);  // Nova funcionalidade
+                exibir_disciplinas_por_periodo(arvore_cursos);
                 break;
             case 8:
-                exibir_disciplinas_aluno(lista_alunos);          // Nova funcionalidade
+                exibir_disciplinas_aluno(lista_alunos);
                 break;
             case 0:
                 printf("Saindo...\n");
