@@ -31,4 +31,4 @@ void cadastra_nota(Nota **raiz, int codigo_disciplina, int semestre, float nota_
             anterior->dir = novo;
         }
     }
-}
+} //teste

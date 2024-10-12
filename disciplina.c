@@ -31,7 +31,7 @@ void cadastra_disciplina(ArvoreDisciplinas **raiz, int codigo, char nome[], int 
         return;
     }
 
-    if (verifica _codigo_disciplina_existente(*raiz, codigo)) {
+    if (verifica_codigo_disciplina_existente(*raiz, codigo)) {
         printf("Erro: Código de disciplina já existe!\n");
         return;
     }
