@@ -37,7 +37,7 @@ void cadastra_curso(ArvoreCursos **raiz, int codigo, char nome[], int quantidade
             novo->curso->arvore_disciplinas = NULL;
             novo->esq = novo->dir = NULL;
 
-            if (*raiz == NULL) {
+            if (*raiz == NULL ) {
                 *raiz = novo;
             } else {
                 ArvoreCursos *atual = *raiz, *anterior = NULL;

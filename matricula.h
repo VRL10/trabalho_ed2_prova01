@@ -8,8 +8,8 @@ typedef struct Matricula {
 
 void inicializa_arvore_matricula(Matricula **raiz);
 void cadastra_matricula(Matricula **raiz, int codigo_disciplina);
+void cadastrar_aluno_disciplina(Matricula **raiz, int codigo_disciplina);
 int remove_matricula(Matricula **raiz, int codigo_disciplina);
-int remove_matricula_disciplina(Matricula **raiz, int codigo_disciplina);
-void cadastrar_aluno_disciplina(Aluno *aluno, int codigo_disciplina);
+Matricula* encontra_minimo(Matricula *raiz);
 
 #endif

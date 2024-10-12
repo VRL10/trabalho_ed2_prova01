@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "matricula.h"
-#include "aluno.h"
 
 void inicializa_arvore_matricula(Matricula **raiz) {
     *raiz = NULL;
@@ -19,11 +18,8 @@ void cadastra_matricula(Matricula **raiz, int codigo_disciplina) {
     }
 }
 
-Matricula* encontra_minimo(Matricula *raiz) {
-    while (raiz->esq != NULL) {
-        raiz = raiz->esq;
-    }
-    return raiz;
+void cadastrar_aluno_disciplina(Matricula **raiz, int codigo_disciplina) {
+    cadastra_matricula(raiz, codigo_disciplina);
 }
 
 int remove_matricula(Matricula **raiz, int codigo_disciplina) {
@@ -51,10 +47,9 @@ int remove_matricula(Matricula **raiz, int codigo_disciplina) {
     }
 }
 
-int remove_matricula_disciplina(Matricula **raiz, int codigo_disciplina) {
-    return remove_matricula(raiz, codigo_disciplina);
-}
-
-void cadastrar_aluno_disciplina(Aluno *aluno, int codigo_disciplina) {
-    cadastra_matricula(&aluno->arvore_matricula, codigo_disciplina);
+Matricula* encontra_minimo(Matricula *raiz) {
+    while (raiz->esq != NULL) {
+        raiz = raiz->esq;
+    }
+    return raiz;
 }

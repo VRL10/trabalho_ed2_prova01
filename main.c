@@ -17,73 +17,11 @@ int menu() {
     printf("6. Exibir Disciplinas de um Curso\n");
     printf("7. Exibir Disciplinas por Periodo de um Curso\n");
     printf("8. Exibir Disciplinas de um Aluno\n");
-    printf("9. Remover Disciplina de um Curso\n");
-    printf("10. Remover Disciplina da Árvore de Matrículas\n");
-    printf("11. Cadastrar Aluno em uma Disciplina\n");
     printf("0. Sair\n");
     printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
     return opcao;
 }
-
-// Função auxiliar para remover uma disciplina de um curso
-void remover_disciplina(ArvoreCursos *arvore_cursos) {
-    int codigo_curso, codigo_disciplina;
-    Curso *curso;
-
-    printf("Digite o código do curso: ");
-    scanf("%d ", &codigo_curso);
-    printf("Digite o código da disciplina: ");
-    scanf("%d", &codigo_disciplina);
-
-    curso = busca_curso(arvore_cursos, codigo_curso);
-    if (curso == NULL) {
-        printf("Curso não encontrado!\n");
-        return;
-    }
-
-    remove_disciplina(&curso->arvore_disciplinas, codigo_disciplina);
-}
-
-// Função auxiliar para remover uma disciplina da árvore de matrículas
-void remover_disciplina_matricula(ListaAlunos *lista_alunos) {
-    int matricula, codigo_disciplina;
-    Aluno *aluno;
-
-    printf("Digite a matrícula do aluno: ");
-    scanf("%d", &matricula);
-    printf("Digite o código da disciplina: ");
-    scanf("%d", &codigo_disciplina);
-
-    aluno = busca_aluno(lista_alunos, matricula);
-    if (aluno == NULL) {
-        printf("Aluno não encontrado!\n");
-        return;
-    }
-
-    remove_matricula_disciplina(&aluno->arvore_matricula, codigo_disciplina);
-}
-
-// Função auxiliar para cadastrar um aluno em uma disciplina
-void cadastrar_aluno_disciplina(ListaAlunos *lista_alunos) {
-    int matricula, codigo_disciplina;
-    Aluno *aluno;
-
-    printf("Digite a matrícula do aluno: ");
-    scanf("%d", &matricula);
-    printf("Digite o código da disciplina: ");
-    scanf("%d", &codigo_disciplina);
-
-    aluno = busca_aluno(lista_alunos, matricula);
-    if (aluno == NULL) {
-        printf("Aluno não encontrado!\n");
-        return;
-    }
-
-    cadastrar_aluno_disciplina(aluno, codigo_disciplina);
-}
-
-
 
 // Função auxiliar para cadastro de cursos
 void cadastrar_curso(ArvoreCursos **arvore_cursos) {
@@ -97,7 +35,7 @@ void cadastrar_curso(ArvoreCursos **arvore_cursos) {
     printf("Digite a quantidade de períodos do curso: ");
     scanf("%d", &qtd_periodos);
 
-    cadastra_curso(arvore_cursos, codigo, nome, qtd_periodos);
+    cadastra_curso(arvore_c ursos, codigo, nome, qtd_periodos);
 }
 
 // Função auxiliar para cadastro de disciplinas
@@ -180,6 +118,24 @@ void exibir_disciplinas_aluno(ListaAlunos *lista_alunos) {
     exibe_disciplinas_aluno(aluno->arvore_matricula);
 }
 
+void cadastrar_aluno_disciplina(ListaAlunos *lista_alunos) {
+    int matricula, codigo_disciplina;
+    Aluno *aluno;
+
+    printf("Digite a matrícula do aluno: ");
+    scanf("%d", &matricula);
+    printf("Digite o código da disciplina: ");
+    scanf("%d", &codigo_disciplina);
+
+    aluno = busca_aluno(lista_alunos, matricula);
+    if (aluno == NULL) {
+        printf("Aluno não encontrado!\n");
+        return;
+    }
+
+    cadastrar_aluno_disciplina(aluno, codigo_disciplina);
+}
+
 int main() {
     ArvoreCursos *arvore_cursos;
     ListaAlunos *lista_alunos;
@@ -199,7 +155,7 @@ int main() {
                 cadastrar_disciplina(arvore_cursos);
                 break;
             case 3:
-                cadastrar_aluno(&lista_alunos, arvore_cursos);
+                cadastrar_aluno(& lista_alunos, arvore_cursos);
                 break;
             case 4:
                 exibe_cursos(arvore_cursos);
@@ -207,7 +163,7 @@ int main() {
             case 5:
                 exibe_alunos(lista_alunos);
                 break;
-            case 6:
+            case  6:
                 printf("Digite o código do curso para exibir as disciplinas:\n");
                 int codigo_curso;
                 scanf("%d", &codigo_curso);
@@ -225,12 +181,6 @@ int main() {
                 exibir_disciplinas_aluno(lista_alunos);
                 break;
             case 9:
-                remover_disciplina(arvore_cursos);
-                break;
-            case 10:
-                remover_disciplina_matricula(lista_alunos);
-                break;
-            case 11:
                 cadastrar_aluno_disciplina(lista_alunos);
                 break;
             case 0:

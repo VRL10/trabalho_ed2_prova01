@@ -87,3 +87,7 @@ void exibe_disciplinas_aluno(Matricula *raiz) {
 
     exibe_disciplinas_aluno(raiz->dir); // Exibe disciplinas da subárvore direita
 }
+
+void cadastrar_aluno_disciplina(Aluno *aluno, int codigo_disciplina) {
+    cadastrar_aluno_disciplina(&aluno->arvore_matricula, codigo_disciplina);
+}

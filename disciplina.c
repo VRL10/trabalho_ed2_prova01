@@ -108,29 +108,9 @@ void exibe_disciplinas_por_periodo(ArvoreDisciplinas *raiz, int periodo) {
     exibe_disciplinas_por_periodo(raiz->dir, periodo); // Percorre a subárvore direita
 }
 
-int remove_disciplina(ArvoreDisciplinas **raiz, int codigo_disciplina) {
-    if (*raiz == NULL) {
-        return 1; // Disciplina não encontrada
+ArvoreDisciplinas* encontra_minimo(ArvoreDisciplinas *raiz) {
+    while (raiz->esq != NULL) {
+        raiz = raiz->esq;
     }
-
-    if (codigo_disciplina < (*raiz)->disciplina->codigo) {
-        return remove_disciplina(&(*raiz)->esq, codigo_disciplina);
-    } else if (codigo_disciplina > (*raiz)->disciplina->codigo) {
-        return remove_disciplina(&(*raiz)->dir, codigo_disciplina);
-    } else {
-        ArvoreDisciplinas *temp = *raiz;
-        if ((*raiz)->esq == NULL) {
-            *raiz = (*raiz)->dir;
-        } else if ((*raiz)->dir == NULL) {
-            *raiz = (*raiz)->esq;
-        } else {
-            ArvoreDisciplinas *min = encontra_minimo((*raiz)->dir);
-            (*raiz)->disciplina->codigo = min->disciplina->codigo;
-            strcpy((*raiz)->disciplina->nome, min->disciplina->nome);
-            remove_disciplina(&(*raiz)->dir, min->disciplina->codigo);
-        }
-        free(temp->disciplina);
-        free(temp);
-        return 0; // Sucesso
-    }
+    return raiz;
 }
