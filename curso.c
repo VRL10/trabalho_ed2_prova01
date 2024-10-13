@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "curso.h"
 
 int verifica_codigo_curso_existente(ArvoreCursos *raiz, int codigo) {

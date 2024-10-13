@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "disciplina.h"
 
 int verifica_codigo_disciplina_existente(ArvoreDisciplinas *raiz, int codigo) {
