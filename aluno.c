@@ -75,3 +75,13 @@ void exibe_alunos(ListaAlunos *lista) {
         lista = lista->prox;
     }
 }
+
+void exibe_disciplinas_aluno(Matricula *raiz) {
+    if (raiz == NULL) {
+        return;
+    }
+
+    exibe_disciplinas_aluno(raiz->esq);
+    printf("Código da Disciplina: %d\n", raiz->codigo_disciplina);
+    exibe_disciplinas_aluno(raiz->dir);
+}
