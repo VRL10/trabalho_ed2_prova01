@@ -17,6 +17,7 @@ int menu() {
     printf("6. Exibir Disciplinas de um Curso\n");
     printf("7. Exibir Disciplinas por Periodo de um Curso\n");
     printf("8. Exibir Disciplinas de um Aluno\n");
+    printf("9. Matricular Aluno em Disciplina\n");
     printf("0. Sair\n");
     printf("Escolha uma opcao: ");
     scanf("%d", &opcao);
@@ -110,7 +111,7 @@ void exibir_disciplinas_aluno(ListaAlunos *lista_alunos) {
 
     aluno = busca_aluno(lista_alunos, matricula);
     if (aluno == NULL) {
-        printf("Aluno não encontrado!\n");
+        printf("Aluno não encontrado!\n ");
         return;
     }
 
@@ -118,7 +119,8 @@ void exibir_disciplinas_aluno(ListaAlunos *lista_alunos) {
     exibe_disciplinas_aluno(aluno->arvore_matricula);
 }
 
-void cadastrar_aluno_disciplina(ListaAlunos *lista_alunos) {
+// Função auxiliar para matricular aluno em disciplina
+void matricular_aluno_em_disciplina(ListaAlunos *lista_alunos) {
     int matricula, codigo_disciplina;
     Aluno *aluno;
 
@@ -133,7 +135,7 @@ void cadastrar_aluno_disciplina(ListaAlunos *lista_alunos) {
         return;
     }
 
-    cadastrar_aluno_disciplina_aluno(aluno, codigo_disciplina);
+    cadastrar_aluno_disciplina(&aluno->arvore_matricula, codigo_disciplina);
 }
 
 int main() {
@@ -155,7 +157,7 @@ int main() {
                 cadastrar_disciplina(arvore_cursos);
                 break;
             case 3:
-                cadastrar_aluno(& lista_alunos, arvore_cursos);
+                cadastrar_aluno(&lista_alunos, arvore_cursos);
                 break;
             case 4:
                 exibe_cursos(arvore_cursos);
@@ -163,7 +165,7 @@ int main() {
             case 5:
                 exibe_alunos(lista_alunos);
                 break;
-            case  6:
+            case 6:
                 printf("Digite o código do curso para exibir as disciplinas:\n");
                 int codigo_curso;
                 scanf("%d", &codigo_curso);
@@ -181,7 +183,7 @@ int main() {
                 exibir_disciplinas_aluno(lista_alunos);
                 break;
             case 9:
-                cadastrar_aluno_disciplina(lista_alunos);
+                matricular_aluno_em_disciplina(lista_alunos);
                 break;
             case 0:
                 printf("Saindo...\n");

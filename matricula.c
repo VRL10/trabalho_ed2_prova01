@@ -6,20 +6,23 @@ void inicializa_arvore_matricula(Matricula **raiz) {
     *raiz = NULL;
 }
 
-void cadastra_matricula(Matricula **raiz, int codigo_disciplina) {
+void cadastrar_aluno_disciplina(Matricula **raiz, int codigo_disciplina) {
     if (*raiz == NULL) {
         *raiz = (Matricula *)malloc(sizeof(Matricula));
         (*raiz)->codigo_disciplina = codigo_disciplina;
         (*raiz)->esq = (*raiz)->dir = NULL;
     } else if (codigo_disciplina < (*raiz)->codigo_disciplina) {
-        cadastra_matricula(&(*raiz)->esq, codigo_disciplina);
+        cadastrar_aluno_disciplina(&(*raiz)->esq, codigo_disciplina);
     } else {
-        cadastra_matricula(&(*raiz)->dir, codigo_disciplina);
+        cadastrar_aluno_disciplina(&(*raiz)->dir, codigo_disciplina);
     }
 }
 
-void cadastrar_aluno_disciplina(Matricula **raiz, int codigo_disciplina) {
-    cadastra_matricula(raiz, codigo_disciplina);
+Matricula* encontra_minimo(Matricula *raiz) {
+    while (raiz->esq != NULL) {
+        raiz = raiz->esq;
+    }
+    return raiz;
 }
 
 int remove_matricula(Matricula **raiz, int codigo_disciplina) {
@@ -45,11 +48,4 @@ int remove_matricula(Matricula **raiz, int codigo_disciplina) {
         free(temp);
         return 0; // Sucesso
     }
-}
-
-Matricula* encontra_minimo(Matricula *raiz) {
-    while (raiz->esq != NULL) {
-        raiz = raiz->esq;
-    }
-    return raiz;
 }

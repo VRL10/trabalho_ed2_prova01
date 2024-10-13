@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "aluno.h"
 #include "curso.h"
+#include "matricula.h"
 
 int verifica_matricula_existente(ListaAlunos *lista, int matricula) {
     while (lista != NULL) {
@@ -49,7 +49,7 @@ void cadastra_aluno(ListaAlunos **lista, ArvoreCursos *arvore_cursos, int matric
             if (anterior == NULL) {
                 *lista = novo;
             } else {
-                anterior->prox = novo;
+                anterior->prox = novo ;
             }
         } else {
             free(novo);
@@ -73,21 +73,4 @@ void exibe_alunos(ListaAlunos *lista) {
                lista->aluno->matricula, lista->aluno->nome, lista->aluno->codigo_curso);
         lista = lista->prox;
     }
-}
-
-void exibe_disciplinas_aluno(Matricula *raiz) {
-    if (raiz == NULL) {
-        return;
-    }
-
-    exibe_disciplinas_aluno(raiz->esq); // Exibe disciplinas da subárvore esquerda
-
-    // Exibe a disciplina
-    printf("Codigo da Disciplina: %d\n", raiz->codigo_disciplina);
-
-    exibe_disciplinas_aluno(raiz->dir); // Exibe disciplinas da subárvore direita
-}
-
-void cadastrar_aluno_disciplina_aluno(Aluno *aluno, int codigo_disciplina) {
-    cadastrar_aluno_disciplina(&aluno->arvore_matricula, codigo_disciplina);
 }

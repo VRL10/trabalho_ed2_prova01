@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "disciplina.h"
 
 int verifica_codigo_disciplina_existente(ArvoreDisciplinas *raiz, int codigo) {
@@ -17,7 +16,7 @@ int verifica_codigo_disciplina_existente(ArvoreDisciplinas *raiz, int codigo) {
     return 0; // Código de disciplina não existe
 }
 
-void inicializa_arvore_disciplinas(ArvoreDisciplinas **raiz) {
+void inicializa_arvore_disciplinas(ArvoreDisciplinas ** raiz) {
     *raiz = NULL;
 }
 
@@ -106,11 +105,4 @@ void exibe_disciplinas_por_periodo(ArvoreDisciplinas *raiz, int periodo) {
     }
 
     exibe_disciplinas_por_periodo(raiz->dir, periodo); // Percorre a subárvore direita
-}
-
-ArvoreDisciplinas* encontra_minimo(ArvoreDisciplinas *raiz) {
-    while (raiz->esq != NULL) {
-        raiz = raiz->esq;
-    }
-    return raiz;
 }

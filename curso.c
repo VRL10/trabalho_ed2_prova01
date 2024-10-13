@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include "curso.h"
 
 int verifica_codigo_curso_existente(ArvoreCursos *raiz, int codigo) {
@@ -37,7 +36,7 @@ void cadastra_curso(ArvoreCursos **raiz, int codigo, char nome[], int quantidade
             novo->curso->arvore_disciplinas = NULL;
             novo->esq = novo->dir = NULL;
 
-            if (*raiz == NULL ) {
+            if (*raiz == NULL) {
                 *raiz = novo;
             } else {
                 ArvoreCursos *atual = *raiz, *anterior = NULL;
